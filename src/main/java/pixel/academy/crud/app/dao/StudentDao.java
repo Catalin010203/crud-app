@@ -7,4 +7,5 @@ public interface StudentDao {
 
     @Transactional
     void save(Student theStudent);
+    Student findById(int theID);
 }

@@ -19,6 +19,7 @@ public class Application {
     public CommandLineRunner commandLineRunner(StudentDao studentDao) {
         return runner -> {
             createStudent(studentDao);
+            createMultipleStudents(studentDao);
         };
     }
 
@@ -36,4 +37,21 @@ public class Application {
         // afisam id-ul studentului salvat
         System.out.println("Saved student. Generated id: " + newStudent.getId());
     }
+
+    private void createMultipleStudents(StudentDao studentDao) {
+
+        // cream mai multi studenti
+        System.out.println("Creating 3 student objects ...");
+        Student newStudent1 = new Student("Ion", "Vasilachi", "vasilachi@GMAIL.COM");
+        Student newStudent2 = new Student("Maria", "Ionescu", "maria@GMAIL.COM");
+        Student newStudent3 = new Student("Andrei", "Vatrici", "andrei@GMAIL.COM");
+
+        // salvam obiectele studen in baza de date
+        System.out.println("Saving the student ..");
+        studentDao.save(newStudent1);
+        studentDao.save(newStudent2);
+        studentDao.save(newStudent3);
+    }
+
+
 }
