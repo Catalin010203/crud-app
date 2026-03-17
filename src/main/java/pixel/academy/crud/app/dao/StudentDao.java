@@ -1,7 +1,10 @@
 package pixel.academy.crud.app.dao;
 
+import jakarta.transaction.Transactional;
 import pixel.academy.crud.app.entity.Student;
 
 public interface StudentDao {
-    void safe(Student theStudent);
+
+    @Transactional
+    void save(Student theStudent);
 }
