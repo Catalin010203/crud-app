@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import pixel.academy.crud.app.dao.StudentDao;
 import pixel.academy.crud.app.entity.Student;
 
+import java.util.List;
+
 @SpringBootApplication
 public class Application {
 
@@ -18,8 +20,11 @@ public class Application {
     @Bean
     public CommandLineRunner commandLineRunner(StudentDao studentDao) {
         return runner -> {
-            createStudent(studentDao);
-            createMultipleStudents(studentDao);
+            //createStudent(studentDao);
+            //createMultipleStudents(studentDao);
+
+            readStudent(studentDao);
+            queryForStudents(studentDao);
         };
     }
 
@@ -51,6 +56,39 @@ public class Application {
         studentDao.save(newStudent1);
         studentDao.save(newStudent2);
         studentDao.save(newStudent3);
+    }
+
+    private void readStudent(StudentDao studentDao) {
+        System.out.println("Reading student ...");
+
+        // Create a object Student
+        System.out.println("Creating student objects ...");
+        Student newStudent = new Student("Maria", "Magdalena", "maria@gmail.com");
+
+        // Save the object Student in Data Base
+        System.out.println("Saving the student ..");
+        studentDao.save(newStudent);
+
+        // Show student's id
+        int theId = newStudent.getId();
+        System.out.println("Saveed student. Generated id: " + theId);
+
+        //Recover student in base of ID
+        System.out.println("Retrieving student with id: " + theId);
+        Student myStudent = studentDao.findById(theId);
+
+        //Show students details
+        System.out.println("Found the student: " + myStudent);
+    }
+
+    private void queryForStudents(StudentDao studentDao) {
+        // Obtain list of students
+        List<Student> theStudents = studentDao.findAll();
+
+        // afiseaza lista de studenti
+        for (Student newStudent : theStudents) {
+            System.out.println(newStudent);
+        }
     }
 
 
