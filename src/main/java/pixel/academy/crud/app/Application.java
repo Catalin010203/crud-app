@@ -21,12 +21,14 @@ public class Application {
     public CommandLineRunner commandLineRunner(StudentDao studentDao) {
         return runner -> {
             //createStudent(studentDao);
-            //createMultipleStudents(studentDao);
+                createMultipleStudents(studentDao);
 
-            readStudent(studentDao);
-            queryForStudents(studentDao);
-            queryForStudentsByLastName(studentDao);
-            updateStudent(studentDao);
+//            readStudent(studentDao);
+//            queryForStudents(studentDao);
+//            queryForStudentsByLastName(studentDao);
+//            updateStudent(studentDao);
+//            deleteStudent(studentDao);
+            //deleteAllStudent(studentDao);
         };
     }
 
@@ -121,4 +123,16 @@ public class Application {
         System.out.println("Updated student: " + newStudent);
     }
 
+    private void deleteStudent(StudentDao studentDao) {
+
+        int studentID = 3;
+        System.out.println("Deleting student with id: " + studentID);
+        studentDao.delete(studentID);
+    }
+
+    private void deleteAllStudent(StudentDao studentDao) {
+        System.out.println("Deleting all students... ");
+        int numRowsDeleted = studentDao.deleteAll();
+        System.out.println("Deleted row count: " + numRowsDeleted);
+    }
 }
