@@ -31,7 +31,7 @@ public class StudentsDaoImplementation implements StudentDao {
     }
 
     @Override
-    public Student findById(int id) {
+    public Student findById(Integer id) {
         return entityManager.find(Student.class, id);
     }
 
@@ -44,6 +44,22 @@ public class StudentsDaoImplementation implements StudentDao {
         return theQuery.getResultList();
     }
 
+    @Override
+    public List<Student> findByLastName(String theLastName) {
+        //Create query
+        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student WHERE lastName = :theData", Student.class);
+
+        // Set parameter for query
+        theQuery.setParameter("theData", theLastName);
+
+        //Return query results
+        return theQuery.getResultList();
+    }
 
 
+    @Override
+    @Transactional
+    public void update(Student theStudent) {
+        entityManager.merge(theStudent);
+    }
 }

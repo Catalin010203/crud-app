@@ -9,6 +9,8 @@ public interface StudentDao {
 
     @Transactional
     void save(Student theStudent);
-    Student findById(int theID);
+    Student findById(Integer theID);
     List<Student> findAll();
+    List<Student> findByLastName(String theLastName);
+    void update(Student theStudent);
 }

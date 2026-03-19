@@ -25,6 +25,8 @@ public class Application {
 
             readStudent(studentDao);
             queryForStudents(studentDao);
+            queryForStudentsByLastName(studentDao);
+            updateStudent(studentDao);
         };
     }
 
@@ -85,11 +87,38 @@ public class Application {
         // Obtain list of students
         List<Student> theStudents = studentDao.findAll();
 
-        // afiseaza lista de studenti
+        // show list of students
         for (Student newStudent : theStudents) {
             System.out.println(newStudent);
         }
     }
 
+
+    private void queryForStudentsByLastName(StudentDao studentDao) {
+
+        List<Student> theStudent = studentDao.findByLastName("Vasilachi");
+
+        for (Student newStudent : theStudent) {
+            System.out.println(newStudent);
+        }
+    }
+
+    private void updateStudent(StudentDao studentDao) {
+
+        // find the student in DB with ID
+        int studentID = 1;
+        System.out.println("Getting student with id: " + studentID);
+        Student newStudent = studentDao.findById(studentID);
+
+        // modify student secondname "Ion"
+        System.out.println("Updating student ...");
+        newStudent.setFirstName("Ion");
+
+        // save modification in DB
+        studentDao.update(newStudent);
+
+        // show details about students
+        System.out.println("Updated student: " + newStudent);
+    }
 
 }
